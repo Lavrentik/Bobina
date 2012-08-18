@@ -11,7 +11,6 @@ import java.net.Socket;
  */
 public class Server
 {
-
     public static final int PORT = 3333;
 
     public static final int CODE_SUCCESS = 0;

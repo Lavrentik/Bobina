@@ -189,10 +189,10 @@ public class ServerThread extends Thread
                 String templateQuery = resultSet.getString( "query" );
                 try
                 {
-                    String query = command.getQuery(templateQuery);
-                    executeQuery(query);
+                    String query = command.getQuery( templateQuery );
+                    executeQuery( query );
                 }
-                catch(NoParameterException e)
+                catch( NoParameterException e )
                 {
                     sendResponseToClient( Server.CODE_ERROR_NO_PARAMETER, e.getMessage() );
                 }
@@ -208,7 +208,6 @@ public class ServerThread extends Thread
             sendResponseToClient( Server.CODE_ERROR_OPERATION_NOT_FOUND, "operation " + command.getCode() + " not found" );
         }
         statement.close();
-
     }
 
     private void executeQuery( String query ) throws SQLException

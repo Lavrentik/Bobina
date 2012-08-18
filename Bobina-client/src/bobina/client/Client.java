@@ -78,7 +78,7 @@ public class Client
         writer.println( command );
         int resultCode = Integer.parseInt( reader.readLine() );
         printServerResponse();
-        if (resultCode == Server.CODE_CONNECTION_CLOSED)
+        if( resultCode == Server.CODE_CONNECTION_CLOSED )
         {
             throw new ConnectionClosedException();
         }
