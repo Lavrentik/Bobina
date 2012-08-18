@@ -1,6 +1,7 @@
 package bobina.base;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -58,25 +59,28 @@ public class Command
     /**
      * Метод формирует sql-запрос по заданному шаблону, подставляя все необходимые параметры
      *
-     * @param templateQuery шаблон запроса, имена подставляемых параметров берутся в треугольные скобки. Пример "SELECT * FROM users WHERE username = <@username@>"
+     * @param templateQuery шаблон запроса, имена подставляемых параметров помещаются в "<@ @>". Пример "SELECT * FROM users WHERE username = <@username@>"
      * @return готовый к применению sql-запрос
      * @throws NoParameterException если не задан параметр, требуемый в запросе
      */
     public String getQuery( String templateQuery ) throws NoParameterException
     {
-        //TODO: изменить алгоритм
-        String query = getUnSafeQuery( templateQuery );
-        if( !query.contains( PARAMETER_PREFIX ) )
+        Set<String> queryParameters = new HashSet<String>();
+        int cur = templateQuery.indexOf( PARAMETER_PREFIX );
+        while( cur != -1 )
         {
-            return query;
+            int end = templateQuery.indexOf( PARAMETER_POSTFIX, cur );
+            String parameterName = templateQuery.substring( cur + PARAMETER_PREFIX.length(), end );
+            queryParameters.add( parameterName );
+            cur = templateQuery.indexOf( PARAMETER_PREFIX, end );
+        }
+        if( parametersMap.keySet().containsAll( queryParameters ) )
+        {
+            return getUnSafeQuery( templateQuery );
         }
         else
         {
-            throw new NoParameterException(
-                "parameter "
-                + query.substring( query.indexOf( PARAMETER_PREFIX ) + PARAMETER_PREFIX.length(),
-                                   query.indexOf( PARAMETER_POSTFIX ) )
-                + " is not set" );
+            throw new NoParameterException( "it is necessary to set all parameters: " + queryParameters );
         }
     }
 
