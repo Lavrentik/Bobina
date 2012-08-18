@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Bobina.iml" filepath="$PROJECT_DIR$/Bobina.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Bobina-client/Bobina-client.iml" filepath="$PROJECT_DIR$/Bobina-client/Bobina-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Bobina-server/Bobina-server.iml" filepath="$PROJECT_DIR$/Bobina-server/Bobina-server.iml" />
+    </modules>
+  </component>
+</project>
+
